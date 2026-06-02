@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools_scm[toml]>=7"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysaleryd-tage"
+description = "Python library for controlling specific Saleryd HRV system models - Erik, Tage, Emil and Carl"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.txt"]
+authors = [{name = "Mikalai Kukhta", email = "necrokote@users.noreply.github.com"}]
+requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "websockets>=16",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/NecroKote/pysaleryd-tage/"
+Download = "https://pypi.org/project/pysaleryd-tage/#files"
+
+[project.optional-dependencies]
+testing = []
+
+[tool.setuptools_scm]
+version_scheme = "no-guess-dev"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+addopts = "--cov pysaleryd_tage --cov-report term-missing --verbose --timeout 30"
+norecursedirs = ["dist", "build", ".tox", "tests/utils"]
+testpaths = ["tests"]
