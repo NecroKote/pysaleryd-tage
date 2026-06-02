@@ -19,7 +19,11 @@ async def connected_device(host: str, port: int = 3001):
     async def _producer(ws):
         await device.process(ws.send)
 
-    async with connect(f"ws://{host}:{port}") as ws:
+    async with connect(
+        f"ws://{host}:{port}",
+        ping_interval=None,
+        ping_timeout=None,
+    ) as ws:
         consumer_task = asyncio.create_task(_consumer(ws))
         producer_task = asyncio.create_task(_producer(ws))
 
