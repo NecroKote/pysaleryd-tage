@@ -38,6 +38,7 @@ async def connected_device(
         f"ws://{host}:{port}",
         ping_interval=None,
         ping_timeout=None,
+        close_timeout=0.1,
     ) as ws:
         got_packet_event = asyncio.Event()
 
@@ -56,4 +57,4 @@ async def connected_device(
         finally:
             for task in tasks:
                 task.cancel()
-            await asyncio.gather(*tasks, return_exceptions=True)
+            await asyncio.shield(asyncio.gather(*tasks, return_exceptions=True))
